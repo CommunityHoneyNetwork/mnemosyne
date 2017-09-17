@@ -7,6 +7,8 @@ port = 8181
 mongo_host = localhost
 mongo_port = 27017
 database = mnemosyne
+mnemodb_user =
+mnemodb_pass =
 
 [hpfriends]
 ident =
@@ -24,4 +26,4 @@ enabled = False
 token =
 
 [normalizer]
-ignore_rfc1918 = True
+ignore_rfc1918 = False
