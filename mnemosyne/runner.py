@@ -59,6 +59,9 @@ def parse_config(config_file):
     config['mongo_port'] = parser.getint('mongodb', 'mongo_port')
     config['mongo_db'] = parser.get('mongodb', 'database')
 
+    config['mnemodb_user'] = parser.get('mongodb', 'mnemodb_user')
+    config['mnemodb_pass'] = parser.get('mongodb', 'mnemodb_pass')
+
     config['hpf_feeds'] = parser.get('hpfriends', 'channels').split(',')
     config['hpf_ident'] = parser.get('hpfriends', 'ident')
     config['hpf_secret'] = parser.get('hpfriends', 'secret')
@@ -116,7 +119,7 @@ if __name__ == '__main__':
     greenlets = {}
 
     db = mnemodb.MnemoDB(host=c['mongo_host'], port=c['mongo_port'],
-                         database_name=c['mongo_db'])
+                         database_name=c['mongo_db'], db_user=c['mnemodb_user'], db_pass=c['mnemodb_pass'])
 
     webapi = None
     hpfriends_puller = None

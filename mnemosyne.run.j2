@@ -23,11 +23,13 @@ then
     sed -i "s/channels *=.*/channels = $CHANNELS/" {{ mnemosyne_dir }}/mnemosyne.cfg
     sed -i "s/mongo_host *=.*/mongo_host = ${MONGODB_HOST}/" {{ mnemosyne_dir }}/mnemosyne.cfg
     sed -i "s/mongo_port *=.*/mongo_port = ${MONGODB_PORT}/" {{ mnemosyne_dir }}/mnemosyne.cfg
+    sed -i "s/mnemodb_user *=.*/mnemodb_user = ${MNEMODB_USER}/" {{ mnemosyne_dir }}/mnemosyne.cfg
+    sed -i "s/mnemodb_pass *=.*/mnemodb_pass = ${MNEMODB_PASS}/" {{ mnemosyne_dir }}/mnemosyne.cfg
 
 
     # Generate config file for hpfeeds broker and register
     cd {{ hpfeeds_dir }}/hpfeeds/broker/
-    python {{ hpfeeds_dir }}/hpfeeds/broker/generateconfig.py unattended --mongo_host ${MONGODB_HOST} --mongo_port ${MONGODB_PORT}
+    python {{ hpfeeds_dir }}/hpfeeds/broker/generateconfig.py unattended --mongo_host ${MONGODB_HOST} --mongo_port ${MONGODB_PORT} --hpdb_user ${HPDB_USER} --hpdb_pass ${HPDB_PASS}
     python {{ hpfeeds_dir }}/hpfeeds/broker/add_user.py "$IDENT" "$SECRET" "" "$CHANNELS"
 fi
 
